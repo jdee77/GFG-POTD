@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+	public:
+	    
+	    int sieve(int x, int y)
+	    {
+	        int l = min(x, y);
+	        int r = max(x, y);
+	        bool ar[r];
+	        memset(ar, true, sizeof(ar));
+	        ar[0] = false;
+	        ar[1] = true;
+	        
+	        for(int i = 2; i<= r; i++)
+	        {
+                if(ar[i])
+                {
+                    for(int j = i * 2; j<= r; j+= i)
+                    {
+                        ar[j] =false;
+                    }
+                }
+	        }
+	        int prime = 0;
+	        int composite = 0;
+	        
+	        for(int  i = max(2, l); i<= r; i++)
+	        {
+	            if(ar[i]) prime++;
+	            else composite++;
+	        }
+	        return composite - prime;
+	    }
+		int Count(int L, int R){
+		    return sieve(L, R);
+		}
+
+};
+
+//{ Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int L, R;
+		cin >> L >> R;
+		Solution obj;
+		int ans = obj.Count(L, R);
+		cout << ans << "\n";
+	}
+	return 0;
+}
+// } Driver Code Ends
